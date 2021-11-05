@@ -29,10 +29,24 @@ jobs:
           ~/.cache/pants/lmdb_store
           ~/.cache/pants/named_caches
         key: ${{ runner.os }}-
+    - name: Install Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.17.1
     - name: Bootstrap Pants
       run: ./pants --version
     - name: Check Pants config files
       run: ./pants tailor --check update-build-files --check
+    - name: Lint and compile
+      run: ./pants lint check '::'
+    - name: Test
+      run: ./pants test '::'
+    - name: Package / Run
+      run: |
+        # We also smoke test that our release process will work by running `package`.
+        ./pants package ::
+        ./pants run cmd/greeter_en:
+        ./pants run cmd/greeter_es:
     - name: Upload Pants log
       uses: actions/upload-artifact@v2
       with:
