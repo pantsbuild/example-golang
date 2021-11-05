@@ -29,6 +29,10 @@ jobs:
           ~/.cache/pants/lmdb_store
           ~/.cache/pants/named_caches
         key: ${{ runner.os }}-
+    - name: Install Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.17.1
     - name: Bootstrap Pants
       run: ./pants --version
     - name: Check Pants config files
