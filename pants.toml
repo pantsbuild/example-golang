@@ -1,0 +1,9 @@
+# Copyright 2021 Pants project contributors.
+# Licensed under the Apache License, Version 2.0 (see LICENSE).
+
+[GLOBAL]
+pants_version = "2.8.0rc3"
+
+[anonymous-telemetry]
+enabled = true
+repo_id = "AE018A26-213E-4B18-99A6-6923EC1E16DE"
