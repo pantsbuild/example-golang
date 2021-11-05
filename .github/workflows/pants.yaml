@@ -32,9 +32,7 @@ jobs:
     - name: Bootstrap Pants
       run: ./pants --version
     - name: Check Pants config files
-      run: |
-        ./pants tailor --check  # Check if any targets missing
-        ./pants update-build-files --check  # Check for deprecations and formatting
+      run: ./pants tailor --check update-build-files --check
     - name: Upload Pants log
       uses: actions/upload-artifact@v2
       with:
