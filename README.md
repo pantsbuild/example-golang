@@ -2,8 +2,9 @@
 
 An example repository to demonstrate Pants's experimental Golang support.
 
-See [] for some unique benefits Pants brings to Golang repositories, and see
-[pantsbuild.org/docs/go-overview](https://www.pantsbuild.org/v2.8/docs/go-overview) for much more detailed
+See the [Golang blog post](https://blog.pantsbuild.org/golang-support-pants-28/) for some unique
+benefits Pants brings to Golang repositories, and see
+[pantsbuild.org/docs/go-overview](https://www.pantsbuild.org/v2.8/docs/go-overview) for more detailed
 documentation.
 
 This is only one possible way of laying out your project with Pants. See 
