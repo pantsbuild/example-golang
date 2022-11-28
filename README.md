@@ -58,23 +58,23 @@ Try these out in this repo!
 
 ```
 ./pants fmt ::  # Format all packages.
-./pants fmt cmd/greeter_en:  # Format only this package.
-./pants lint pkg::  # Check that all packages under `pkg` are formatted.
+./pants fmt cmd/greeter_en  # Format only this package.
+./pants lint pkg/::  # Check that all packages under `pkg` are formatted.
 ```
 
 ## Check compilation
 
 ```
 ./pants check ::  # Compile all packages.
-./pants check cmd/greeter_en:  # Compile only this package and its transitive dependencies.
+./pants check cmd/greeter_en  # Compile only this package and its transitive dependencies.
 ```
 
 ## Run tests
 
 ```
 ./pants test ::  # Run all tests in the repository.
-./pants test pkg/uuid:  # Run all the tests in this package.
-./pants test pkg/uuid: -- -run TestGenerateUuid  # Run just this one test.
+./pants test pkg/uuid  # Run all the tests in this package.
+./pants test pkg/uuid -- -run TestGenerateUuid  # Run just this one test.
 ```
 
 ## Create a binary file
@@ -82,22 +82,22 @@ Try these out in this repo!
 Writes the result to the `dist/` folder.
 
 ```
-./pants package cmd/greeter_en:
-./pants package cmd::  # Create all binaries.
+./pants package cmd/greeter_en
+./pants package cmd/::  # Create all binaries.
 ```
 
 ## Run a binary
 
 ```
-./pants run cmd/greeter_en:
-./pants run cmd/greeter_es: -- --help
+./pants run cmd/greeter_en
+./pants run cmd/greeter_es -- --help
 ```
 
 ## Determine dependencies
 
 ```
-./pants dependencies cmd/greeter_en:
-./pants dependencies --transitive cmd/greeter_en:
+./pants dependencies cmd/greeter_en
+./pants dependencies --transitive cmd/greeter_en
 ```
 
 ## Determine dependees
@@ -105,8 +105,8 @@ Writes the result to the `dist/` folder.
 That is, find what code depends on a particular package(s).
 
 ```
-./pants dependees pkg/uuid:
-./pants dependees --transitive pkg/uuid: 
+./pants dependees pkg/uuid
+./pants dependees --transitive pkg/uuid
 ```
 
 ## Count lines of code
