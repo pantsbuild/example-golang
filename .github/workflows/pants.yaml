@@ -64,7 +64,7 @@ jobs:
         ./pants run cmd/greeter_en
         ./pants run cmd/greeter_es
     - name: Upload Pants log
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: pants-log
         path: .pants.d/pants.log
