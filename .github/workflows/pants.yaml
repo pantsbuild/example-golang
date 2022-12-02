@@ -18,13 +18,14 @@ jobs:
   build:
     name: Perform CI Checks
     needs: org-check
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     strategy:
       matrix:
+        # The python version to run Pants itself on.
         python-version: [3.9]
     steps:
     - uses: actions/checkout@v3
-    - uses: pantsbuild/actions/init-pants@v1
+    - uses: pantsbuild/actions/init-pants@v2
       # This action bootstraps pants and manages 2-3 GHA caches.
       # See: github.com/pantsbuild/actions/tree/main/init-pants/
       with:
@@ -32,9 +33,9 @@ jobs:
         # cache0 makes it easy to bust the cache if needed
         # just increase the integer to start with a fresh cache
         gha-cache-key: cache0-py${{ matrix.python-version }}
-        # The Python backend uses named_caches for Pip/PEX state,
-        # so it is appropriate to invalidate on lockfile changes.
-        named-caches-hash: ${{ hashFiles('python-default.lock') }}
+        # The go backend doesn't use named caches. See the example-python repo for an example
+        # of how to set up this cache.
+        named-caches-hash: ""
         # If you're not using a fine-grained remote caching service (see https://www.pantsbuild.org/docs/remote-caching),
         # then you may also want to preserve the local Pants cache (lmdb_store). However this must invalidate for
         # changes to any file that can affect the build, so may not be practical in larger repos.
@@ -64,7 +65,7 @@ jobs:
         ./pants run cmd/greeter_en:
         ./pants run cmd/greeter_es:
     - name: Upload Pants log
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: pants-log
         path: .pants.d/pants.log
