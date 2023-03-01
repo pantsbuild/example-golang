@@ -10,4 +10,4 @@ enabled = true
 repo_id = "AE018A26-213E-4B18-99A6-6923EC1E16DE"
 
 [golang]
-expected_version = "1.19"
+minimum_expected_version = "1.19"
