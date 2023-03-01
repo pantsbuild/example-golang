@@ -19,20 +19,15 @@ jobs:
     name: Perform CI Checks
     needs: org-check
     runs-on: ubuntu-20.04
-    strategy:
-      matrix:
-        # The python version to run Pants itself on.
-        python-version: [3.9]
     steps:
     - uses: actions/checkout@v3
-    - uses: pantsbuild/actions/init-pants@v2
+    - uses: pantsbuild/actions/init-pants@v4-scie-pants
       # This action bootstraps pants and manages 2-3 GHA caches.
       # See: github.com/pantsbuild/actions/tree/main/init-pants/
       with:
-        pants-python-version: ${{ matrix.python-version }}
-        # cache0 makes it easy to bust the cache if needed
+        # v0 makes it easy to bust the cache if needed
         # just increase the integer to start with a fresh cache
-        gha-cache-key: cache0-py${{ matrix.python-version }}
+        gha-cache-key: v0
         # The go backend doesn't use named caches. See the example-python repo for an example
         # of how to set up this cache.
         named-caches-hash: ""
@@ -49,21 +44,21 @@ jobs:
     - name: Install Go
       uses: actions/setup-go@v2
       with:
-        go-version: 1.17.1
+        go-version: 1.19.5
     - name: Bootstrap Pants
-      run: ./pants --version
+      run: pants --version
     - name: Check Pants config files
-      run: ./pants tailor --check update-build-files --check
+      run: pants tailor --check update-build-files --check
     - name: Lint and compile
-      run: ./pants lint check '::'
+      run: pants lint check '::'
     - name: Test
-      run: ./pants test '::'
+      run: pants test '::'
     - name: Package / Run
       run: |
         # We also smoke test that our release process will work by running `package`.
-        ./pants package ::
-        ./pants run cmd/greeter_en
-        ./pants run cmd/greeter_es
+        pants package ::
+        pants run cmd/greeter_en:
+        pants run cmd/greeter_es:
     - name: Upload Pants log
       uses: actions/upload-artifact@v3
       with:
