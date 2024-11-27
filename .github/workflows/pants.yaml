@@ -1,7 +1,7 @@
 # Copyright 2021 Pants project contributors.
 # Licensed under the Apache License, Version 2.0 (see LICENSE).
 
-# See https://www.pantsbuild.org/2.21/docs/using-pants/using-pants-in-ci for tips on how to set up your CI with Pants.
+# See https://www.pantsbuild.org/stable/docs/using-pants/using-pants-in-ci for tips on how to set up your CI with Pants.
 
 name: Pants
 
@@ -20,7 +20,7 @@ jobs:
     needs: org-check
     runs-on: ubuntu-20.04
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - uses: pantsbuild/actions/init-pants@v5-scie-pants
       # This action bootstraps pants and manages 2-3 GHA caches.
       # See: github.com/pantsbuild/actions/tree/main/init-pants/
@@ -39,7 +39,7 @@ jobs:
         # Note that named_caches and lmdb_store falls back to partial restore keys which
         # may give a useful partial result that will save time over completely clean state,
         # but will cause the cache entry to grow without bound over time.
-        # See https://www.pantsbuild.org/2.21/docs/using-pants/using-pants-in-ci for tips on how to periodically clean it up.
+        # See https://www.pantsbuild.org/stable/docs/using-pants/using-pants-in-ci for tips on how to periodically clean it up.
         # Alternatively you change gha-cache-key to ignore old caches.
     - name: Install Go
       uses: actions/setup-go@v2
@@ -60,7 +60,7 @@ jobs:
         pants run cmd/greeter_en:
         pants run cmd/greeter_es:
     - name: Upload Pants log
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: pants-log
         path: .pants.d/pants.log
