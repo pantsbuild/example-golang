@@ -1,4 +1,4 @@
-FROM docker.io/golang:1.25.1-trixie
+FROM docker.io/golang:1.24.9-trixie
 
 # install dependencies
 RUN apt-get update && \
