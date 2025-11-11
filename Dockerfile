@@ -6,9 +6,11 @@ RUN apt-get update && \
   zsh \
   && rm -rf /var/lib/apt/lists/*
 # install just
-RUN curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | bash -s -- --to /usr/local/bin
-# setup zsh and oh-my-zsh
-RUN git clone --single-branch --depth 1 https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-RUN cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
-RUN chsh -s /bin/zsh
+# install Pants
+COPY get-pants.sh /tmp/get-pants.sh
+RUN bash /tmp/get-pants.sh --bin-dir /usr/local/bin && \
+  export PATH="/usr/local/bin:$PATH" && \
+  git clone --single-branch --depth 1 https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
+  cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc && \
+  chsh -s /bin/zsh
 CMD [ "/bin/zsh" ]

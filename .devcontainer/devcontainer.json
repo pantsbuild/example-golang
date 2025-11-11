@@ -42,5 +42,6 @@
       "target": "/var/run/docker.sock",
       "type": "bind"
     }
-  ]
+  ],
+  "postCreateCommand": "pants run cmd/greeter_en"
 }
